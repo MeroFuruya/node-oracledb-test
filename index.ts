@@ -1,15 +1,13 @@
-import { connect } from 'http2';
 import OracleDB from 'oracledb';
 
 async function main(): Promise<number> {
     OracleDB.outFormat = OracleDB.OUT_FORMAT_OBJECT;
     OracleDB.initOracleClient({ libDir: 'C:\\oracle\\instantclient_21_9' });
-    
 
     const connection = await OracleDB.getConnection({
-        user: 'lmps',
-        password: 'mac',
-        connectString: 'TEST_LALO',
+        user: process.env.ORACLEDB_USER,
+        password: process.env.ORACLEDB_PASSWORD,
+        connectString: process.env.ORACLEDB_CONNECTIONSTRING,
     }).catch((err) => {
         console.error(err);
     });
